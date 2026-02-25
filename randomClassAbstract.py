@@ -11,7 +11,7 @@ class randomClassAbstract:
         self.jerkMax = jerkMax  
         self.selectZero = selectZero
         
-    def create_movement(self):
+    def create_movement_vel(self):
         jointVelocities = dict.fromkeys(self.joints, False)
         
         for joint in jointVelocities:
@@ -36,6 +36,16 @@ class randomClassAbstract:
         print(jointVelocities)
         return jointVelocities 
     
+    def create_movement_angle(self):
+        pass
+        #head yaw
+        #right shoulder pitch
+        #left shoulder pitch
+    
+    def create_movement_jerk(self):
+        pass
+    
+   
     def run_full(self, time, sequence):
         v_seq = []
         for _ in range(sequence):
@@ -48,9 +58,11 @@ class randomClassAbstract:
     
 def main():
     print("hello!")
-    test1 = randomClassAbstract(['RightArm', 'LeftArm', 'leg', 'head'], {'RightArm': 'LeftArm'}, 0.1, 1, None, None, None, None, None) 
-    test1.create_movement()
+    #update dictionary to have all of the joint DOF (right arm roll, etc etc)
+    test1 = randomClassAbstract(['RightShoulderPitch', 'RightShoulderRoll', 'RightElbowRoll', 'LeftShoulderPitch', 'LeftShoulderRoll', 'LeftElbowRoll'], 
+                                {'RightShoulderPitch': 'LeftShoulderPitch', 'RightShoulderRoll': 'LeftShoulderRoll', 'RightElbowRoll': 'LeftElbowRoll'},
+                                0.1, 1, None, None, None, None, None) 
+    test1.create_movement_vel()
     
 if __name__ == "__main__":
     main()
-    
