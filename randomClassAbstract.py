@@ -40,8 +40,27 @@ class randomClassAbstract:
         return jointVelocities 
     
     def create_movement_angle(self):
-        pass
-        #head yaw
+         jointAngles = dict.fromkeys(self.joints, False)
+         for joint in self.jointParallel:
+                if jointAngles[joint] == False:
+                    jointMove = random.choice([False, True])
+                    print(jointMove)
+                    
+                    if jointMove == True:
+                        jointAngles[joint] = random.uniform(self.angleMin, self.angleMax)
+                        jointAngles[self.jointParallel[joint]] = jointAngles[joint]
+                        
+                    if jointMove == False:
+                        options = [joint, self.jointParallel[joint]]
+                        whichJointMove = random.choice(options)
+                        jointAngles[whichJointMove] = random.uniform(self.angleMin, self.angleMax)
+                        otherJoint = options[1] if whichJointMove == options[0] else options[0] 
+                        jointAngles[otherJoint] = 0
+                        
+                    else:
+                        jointAngles[joint]=random.uniform(self.angleMin, self.angleMax                                               )
+         print(jointAngles)
+         return jointAngles
         #right shoulder pitch
         #left shoulder pitch
     
