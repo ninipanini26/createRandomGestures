@@ -109,8 +109,10 @@ def main():
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 8))
 
     for joint, data in profiles.items():
-        ax1.plot(data['times'], data['velocities'], label=joint)
-        ax2.axhline(y=data['jerk'], linestyle='--', label=joint)
+        line = ax1.plot(data['times'], data['velocities'], label=joint)
+        color = line[0].get_color()
+        ax2.axhline( y=data['jerk'],linestyle='--',color=color,label=joint)
+
         print(f"Joint {joint}: jerk = {data['jerk']}")
         print(f"Joint {joint}: velocities = {data['velocities']}")
 
